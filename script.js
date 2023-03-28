@@ -69,20 +69,22 @@ btnnobed.addEventListener("click", clicknobed);
 
 function clickc(){
     console.log("c")
-    if(mode="RPN"){
+    
         calculation="";
-    }
+    
         totalNum =0
         clearDisplay();
 }
 
 function click0(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         let num = "0";
 
     calculation += num;
     
-        updateDisplay("0")
+        updateRPNDisplay("0")
     }
     else{
 
@@ -97,12 +99,14 @@ function click0(){
 }
 
 function click1(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         let num = "1";
 
     calculation += num;
     
-        updateDisplay("1")
+        updateRPNDisplay("1")
     }
     else{
     let num = "1";
@@ -115,12 +119,14 @@ function click1(){
 }
 
 function click9(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         let num = "9";
 
     calculation += num;
     
-        updateDisplay("9")
+        updateRPNDisplay("9")
     }
     else{
     let num = "9";
@@ -133,13 +139,15 @@ function click9(){
 }
 
 function click2(){
+    onNextInputClear();
+
 
     if (mode == "RPN") {
         let num = "2";
 
     calculation += num;
     
-        updateDisplay("2")
+        updateRPNDisplay("2")
     }
     else{
     let num = "2";
@@ -151,12 +159,14 @@ function click2(){
 }
 }
 function click3(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         let num = "3";
 
     calculation += num;
     
-        updateDisplay("3")
+        updateRPNDisplay("3")
     }
     else{
 
@@ -169,12 +179,14 @@ function click3(){
 }
 }
 function click4(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         let num = "4";
 
     calculation += num;
     
-        updateDisplay("4")
+        updateRPNDisplay("4")
     }
     else{
     let num = "4";
@@ -186,13 +198,15 @@ function click4(){
 }
 }
 function click5(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         let num = "5";
 
     calculation += num;
     
         
-        updateDisplay("5")
+        updateRPNDisplay("5")
     }
     else{
     let num = "5";
@@ -204,12 +218,14 @@ function click5(){
 }
 }
 function click6(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         let num = "6";
 
     calculation += num;
     
-        updateDisplay("6")
+        updateRPNDisplay("6")
     }
     else{
     let num = "6";
@@ -221,13 +237,15 @@ function click6(){
 }
 }
 function click7(){
+    onNextInputClear();
+
     
     if (mode == "RPN") {
         let num = "7";
 
     calculation += num;
     
-        updateDisplay("7")
+        updateRPNDisplay("7")
     }
     else{
     let num = "7";
@@ -239,12 +257,14 @@ function click7(){
 }
 }
 function click8(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         let num = "8";
 
     calculation += num;
     
-        updateDisplay("8")
+        updateRPNDisplay("8")
     }
     else{
     let num = "8";
@@ -257,6 +277,8 @@ function click8(){
 }
 
 function clickdiv(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         calculation = calculation.concat("/");
         console.log(calculation);
@@ -273,6 +295,8 @@ function clickdiv(){
 }
 
 function clickmult(){
+    onNextInputClear();
+
 
     if (mode == "RPN") {
         calculation = calculation.concat("*");
@@ -290,6 +314,8 @@ function clickmult(){
 }
 
 function clickplus(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         calculation = calculation.concat("+");
         console.log(calculation);
@@ -306,6 +332,8 @@ function clickplus(){
 }
 
 function clickminus(){
+    onNextInputClear();
+
     if (mode == "RPN") {
         calculation = calculation.concat("-");
         console.log(calculation);
@@ -322,6 +350,8 @@ function clickminus(){
 }
 
 function clickleftbrack(){
+    onNextInputClear();
+
     let num = "(";
 
     calculation += num;
@@ -330,6 +360,8 @@ function clickleftbrack(){
 }
 
 function clickrightbrack(){
+    onNextInputClear();
+
     let num = ")";
 
     calculation += num;
@@ -357,10 +389,9 @@ function clickequal(){
         let num = "enter";
 
         calculation = calculation.concat(num);
-       updateDisplay(evaluateRPN(calculation));
+       updateRPNDisplay(evaluateRPN(calculation));
 
         clearDisplay()
-        updateDisplay(calculation);
 
     }
 
@@ -419,7 +450,13 @@ function clicknobed(){
     rightbrack.innerHTML=""
 }
 
+function updateRPNDisplay(display){
+    let displayValue = document.getElementById("calc-operation");
+    
+        displayValue.innerHTML+=display;
 
+    
+}
 function updateDisplay(display){
     let displayValue = document.getElementById("typed");
     
@@ -442,6 +479,18 @@ function clearDisplay(){
    
     
 }
+
+function onNextInputClear(){
+    
+    let displayValue = document.getElementById("typed");
+    
+    console.log(calculation)
+    if(displayValue!=""&&calculation==0)
+    clearDisplay()
+
+        }
+   
+
 
 
 
@@ -519,6 +568,7 @@ switch (operator) {
 
 return result;
 }
+
 /** Evaluates an expression in OPR mode */
 function evaluateBED(expression) {
     let oprCalculation = calculation.replace('\xD7', '*').replace('\xF7', '/');
